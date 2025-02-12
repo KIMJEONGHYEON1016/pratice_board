@@ -61,13 +61,22 @@
 //    }
 //
 //    @Operation(summary = "게시글 수정", method = "PATCH")
-//    @ApiResponse(responseCode = "200")
+//    @ApiResponse(responseCode = "200", description = "게시글 수정 성공")
+//    @Parameters({
+//            @Parameter(name = "seq", required = true, description = "수정할 게시글의 고유 번호", example = "123"),
+//            @Parameter(name = "form", required = true, description = "수정할 게시글 데이터")
+//    })
 //    @PatchMapping("/update/{seq}")
-//    public JSONData update(@PathVariable("seq") Long seq, @RequestBody @Valid RequestBoard form, Errors errors) {
+//    public JSONData update(
+//            @PathVariable("seq") Long seq,
+//            @RequestBody @Valid RequestBoard form,
+//            Errors errors) {
+//햣
 //        form.setSeq(seq);
 //        form.setMode("update");
 //        return save(form, errors);
 //    }
+//
 //
 //    // 글 작성, 수정 처리 (ResponseEntity 제거 후 JSONData만 반환)
 //    private JSONData save(RequestBoard form, Errors errors) {
