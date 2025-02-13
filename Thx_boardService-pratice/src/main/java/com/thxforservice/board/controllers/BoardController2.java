@@ -44,21 +44,34 @@
 //
 //    @Operation(summary = "게시판 설정 조회", method = "GET")
 //    @ApiResponse(responseCode = "200", description = "게시판 ID(bid)로 설정 조회")
-//    @Parameter(name="bid", required = true, description = "경로변수, 게시판 ID(bid)", example = "notice")
+//    @Parameter(name = "bid", required = true, description = "경로변수, 게시판 ID(bid)", example = "notice")
 //    @GetMapping("/config/{bid}")
-//    public JSONData getConfig(@PathVariable("bid") String bid) {
+//    public JSONData getConfig(@PathVariable String bid) { // "bid" 생략 가능
 //        Board board = configInfoService.get(bid);
 //        return new JSONData(board);
 //    }
 //
+//    /* @GetMapping("/config/{bid}")
+//    public JSONData getConfig(@PathVariable String bid) {  // "bid" 생략 가능
+//        Board board = configInfoService.get(bid);
+//        return new JSONData(board);
+//    } */
+//
 //    @Operation(summary = "게시글 작성", method = "POST")
 //    @ApiResponse(responseCode = "201")
 //    @PostMapping("/write/{bid}")
-//    public JSONData write(@PathVariable("bid") String bid, @RequestBody @Valid RequestBoard form, Errors errors) {
+//    public JSONData write(@PathVariable String bid, @RequestBody @Valid RequestBoard form, Errors errors) { // "bid" 생략 가능
 //        form.setBid(bid);
 //        form.setMode("write");
 //        return save(form, errors);
 //    }
+//
+//    /* @PostMapping("/write/{bid}")
+//    public JSONData write(@PathVariable String bid, @RequestBody @Valid RequestBoard form, Errors errors) { // "bid" 생략 가능
+//        form.setBid(bid);
+//        form.setMode("write");
+//        return save(form, errors);
+//    } */
 //
 //    @Operation(summary = "게시글 수정", method = "PATCH")
 //    @ApiResponse(responseCode = "200", description = "게시글 수정 성공")
@@ -68,17 +81,22 @@
 //    })
 //    @PatchMapping("/update/{seq}")
 //    public JSONData update(
-//            @PathVariable("seq") Long seq,
+//            @PathVariable Long seq, // "seq" 생략 가능
 //            @RequestBody @Valid RequestBoard form,
 //            Errors errors) {
-//햣
+//
 //        form.setSeq(seq);
 //        form.setMode("update");
 //        return save(form, errors);
 //    }
 //
+//    /* @PatchMapping("/update/{seq}")
+//    public JSONData update(@PathVariable Long seq, @RequestBody @Valid RequestBoard form, Errors errors) { // "seq" 생략 가능
+//        form.setSeq(seq);
+//        form.setMode("update");
+//        return save(form, errors);
+//    } */
 //
-//    // 글 작성, 수정 처리 (ResponseEntity 제거 후 JSONData만 반환)
 //    private JSONData save(RequestBoard form, Errors errors) {
 //        validator.validate(form, errors);
 //
@@ -96,51 +114,46 @@
 //    @Operation(summary = "게시글 하나 조회", method = "GET")
 //    @ApiResponse(responseCode = "200")
 //    @GetMapping("/info/{seq}")
-//    public JSONData info(@PathVariable("seq") Long seq) {
+//    public JSONData info(@PathVariable Long seq) { // "seq" 생략 가능
 //        BoardData item = infoService.get(seq);
 //        viewCountService.update(seq); // 조회수 카운트
 //        return new JSONData(item);
 //    }
 //
+//    /* @GetMapping("/info/{seq}")
+//    public JSONData info(@PathVariable Long seq) {  // "seq" 생략 가능
+//        BoardData item = infoService.get(seq);
+//        viewCountService.update(seq);
+//        return new JSONData(item);
+//    } */
+//
 //    @Operation(summary = "게시글 목록", method = "GET")
 //    @ApiResponse(responseCode = "200")
 //    @GetMapping("/list/{bid}")
-//    public JSONData list(@PathVariable("bid") String bid, @ModelAttribute BoardDataSearch search) {
+//    public JSONData list(@PathVariable String bid, @ModelAttribute BoardDataSearch search) { // "bid" 생략 가능
 //        ListData<BoardData> data = infoService.getList(bid, search);
 //        return new JSONData(data);
 //    }
 //
-//    @Operation(summary = "내 게시글 목록", method = "GET")
-//    @ApiResponse(responseCode = "200")
-//    @GetMapping("/mylist")
-//    public JSONData myList(BoardDataSearch search) {
-//        if (!memberUtil.isLogin()) {
-//            return new JSONData(new ListData<>());
-//        }
-//
-//        Member member = memberUtil.getMember();
-//        search.setEmail(List.of(member.getEmail()));
-//
-//        ListData<BoardData> data = infoService.getList(search, DeleteStatus.UNDELETED);
+//    /* @GetMapping("/list/{bid}")
+//    public JSONData list(@PathVariable String bid, @ModelAttribute BoardDataSearch search) {  // "bid" 생략 가능
+//        ListData<BoardData> data = infoService.getList(bid, search);
 //        return new JSONData(data);
-//    }
+//    } */
 //
 //    @Operation(summary = "게시글 삭제")
 //    @ApiResponse(responseCode = "200")
 //    @DeleteMapping("/delete/{seq}")
-//    public JSONData delete(@PathVariable("seq") Long seq) {
+//    public JSONData delete(@PathVariable Long seq) { // "seq" 생략 가능
 //        BoardData item = deleteService.delete(seq);
 //        return new JSONData(item);
 //    }
 //
-//    @Operation(summary = "찜한 게시글 목록 조회")
-//    @ApiResponse(responseCode = "200")
-//    @GetMapping("/wish")
-//    @PreAuthorize("isAuthenticated()")
-//    public JSONData wishList(CommonSearch search) {
-//        ListData<BoardData> data = infoService.getWishList(search);
-//        return new JSONData(data);
-//    }
+//    /* @DeleteMapping("/delete/{seq}")
+//    public JSONData delete(@PathVariable Long seq) {  // "seq" 생략 가능
+//        BoardData item = deleteService.delete(seq);
+//        return new JSONData(item);
+//    } */
 //
 //    @Operation(summary = "모든 게시글 목록", method = "GET")
 //    @ApiResponse(responseCode = "200")
