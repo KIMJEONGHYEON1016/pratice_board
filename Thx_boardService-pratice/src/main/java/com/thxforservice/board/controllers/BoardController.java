@@ -50,6 +50,11 @@ public class BoardController {
     @Parameter(name="bid", required = true, description = "경로변수, 게시판 ID(bid)", example = "notice")
     // 게시판 설정
     @GetMapping("/config/{bid}")
+    /*
+     * - 리소스(`config/{bid}`)를 명확히 식별
+     * - GET 메서드를 사용하여 리소스 조회
+     */
+
     public JSONData getConfig(@PathVariable("bid") String bid) {
 
         Board board = configInfoService.get(bid);
@@ -80,6 +85,11 @@ public class BoardController {
     })
     // 글쓰기
     @PostMapping("/write/{bid}")
+    /*
+     * - POST 메서드를 사용하여 리소스 생성
+     * - 경로 변수 `{bid}`를 사용하여 해당 게시판에 글을 작성하도록 명확히 지정
+     * - 요청 바디를 사용하여 데이터를 전송 (쿼리 스트링 대신 JSON 사용)
+     */
     public ResponseEntity<JSONData> write(@PathVariable("bid") String bid, @RequestBody @Valid RequestBoard form, Errors errors) {
         form.setBid(bid);
         form.setMode("write");
@@ -112,6 +122,11 @@ public class BoardController {
     })
     // 글 수정
         @PatchMapping("/update/{seq}")
+    /*
+     * - PATCH 메서드를 사용하여 부분 업데이트 수행
+     * - 리소스 식별자로 `seq` 사용
+     * - 데이터 변경을 요청 바디에서 전달 (쿼리 스트링 대신 JSON 사용)
+     */
         public ResponseEntity<JSONData> update(@PathVariable("seq") Long seq, @RequestBody @Valid RequestBoard form, Errors errors) {
             form.setSeq(seq);
             form.setMode("update");
@@ -163,6 +178,11 @@ public class BoardController {
             @Parameter(name="sort", description = "게시판 정렬 조건", example = "viewCount_DESC")
     })
     @GetMapping("/list/{bid}")
+    /*
+     * - GET 메서드를 사용하여 리스트 조회
+     * - `bid`를 경로 변수로 사용하여 특정 게시판의 글만 조회 가능하도록 함
+     * - 검색 및 필터링은 쿼리 파라미터를 활용하여 적용 (예: `page`, `limit`, `sopt` 등)
+     */
     public JSONData list(@PathVariable("bid") String bid, @ModelAttribute BoardDataSearch search) {
         ListData<BoardData> data = infoService.getList(bid, search);
 
@@ -197,6 +217,11 @@ public class BoardController {
     @ApiResponse(responseCode = "200")
     @Parameter(name="seq", required = true, description = "경로변수, 게시글 등록번호", example = "100")
     @DeleteMapping("/delete/{seq}")
+    /*
+     * - DELETE 메서드를 사용하여 리소스 삭제
+     * - 쿼리 스트링 대신 경로 변수 `{seq}`를 사용하여 명확한 리소스 식별
+     * - 응답 데이터로 삭제된 리소스의 정보 반환
+     */
     public JSONData delete(@PathVariable("seq") Long seq) {
         BoardData item = deleteService.delete(seq);
 
@@ -230,6 +255,10 @@ public class BoardController {
             @Parameter(name = "sort", description = "정렬 조건", example = "viewCount_DESC")
     })
     @GetMapping("/posts")
+    /*
+     * - GET 메서드를 사용하여 전체 게시글 목록 조회
+     * - 페이징, 정렬 등의 기능은 쿼리 파라미터를 통해 적용
+     */
     public JSONData listAllPosts(
             @RequestParam(value = "page", defaultValue = "1") int page, // 기본값 1
             @RequestParam(value = "limit", defaultValue = "10") int limit, // 기본값 10
