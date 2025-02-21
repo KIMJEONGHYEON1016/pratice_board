@@ -9,7 +9,7 @@
 //import java.util.UUID;
 //
 //@Data
-//@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true) // JSON에서 정의되지 않은 필드는 무시하고 매핑
 //public class RequestBoard {
 //
 //    private Long seq; // 글 번호 (수정 시 필요)
@@ -18,7 +18,8 @@
 //
 //    @NotBlank(message = "게시판 ID는 필수 입력값입니다.")
 //    private String bid; // 게시판 ID (필수)
-//
+
+//    @JsonIgnore	//필드	특정 필드 하나만 무시
 //    private String gid = UUID.randomUUID().toString(); // 그룹 ID (자동 생성)
 //
 //    private boolean notice; // 공지글 여부
