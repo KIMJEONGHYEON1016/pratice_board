@@ -73,6 +73,7 @@ public class BoardAdminController {
         return new JSONData(board);
     }
 
+
     @Operation(summary = "게시판 목록 조회")
     @ApiResponse(responseCode = "200", description = "items - 조회된 게시글 목록, pagination - 페이징 기초 데이터")
     @Parameters({
