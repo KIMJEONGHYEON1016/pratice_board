@@ -94,6 +94,7 @@ public class BoardAdminController {
         return new JSONData(data);
     }
 
+
     @Operation(summary = "게시판 삭제", description = "게시판 아이디(bid) 기준으로 게시판을 삭제합니다.")
     @ApiResponse(responseCode = "200", description = "게시판 삭제 성공")
     @ApiResponse(responseCode = "404", description = "존재하지 않는 게시판")
