@@ -4,3 +4,6 @@ spring:
   cloud:
     config:
       uri: ${configServerUrl}
+#  messages:
+#      basename: messages/errors  # messages/errors를 기본 메시지 소스로 설정
+#      encoding: UTF-8
