@@ -8,4 +8,5 @@ public class CommentNotFoundException extends CommonException {
         super("NotFound.comment", HttpStatus.NOT_FOUND);
         setErrorCode(true);
     }
+
 }
