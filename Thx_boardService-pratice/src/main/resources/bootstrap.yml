@@ -1,9 +1,15 @@
+# bootstrap.yml은 스프링 부트 애플리케이션이 실행될 때 가장 먼저 로드되는 설정 파일임
+# 일반적으로 애플리케이션의 초기 설정(예: 설정 서버 연결 정보, 서비스 이름 등)을 정의하는 데 사용됨
+
 spring:
   application:
-    name: boardservice
+    name: boardservice  # 애플리케이션의 이름을 설정 (Spring Cloud Config에서 설정을 가져올 때 사용됨)
+
   cloud:
     config:
-      uri: ${configServerUrl}
-#  messages:
-#      basename: messages/errors  # messages/errors를 기본 메시지 소스로 설정
-#      encoding: UTF-8
+      uri: ${configServerUrl}  # Spring Cloud Config 서버의 URI를 지정 (환경 변수로 설정 가능)
+
+# application.yml과의 차이점:
+# - bootstrap.yml은 애플리케이션 실행 전에 먼저 로드됨 (초기 설정 관련)
+# - application.yml은 애플리케이션이 구동된 후 로드됨 (주요 설정 관련)
+# - Config 서버에서 설정을 가져올 때 bootstrap.yml에 정의된 정보가 필요함
