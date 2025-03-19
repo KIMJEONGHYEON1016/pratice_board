@@ -19,12 +19,12 @@
 //    @Operation(summary = "게시판 등록") // API 문서화 (Swagger)
 //    @ApiResponse(responseCode = "201", description = "게시판 등록 성공시 201 반환") // 응답 코드 설명
 //    @Parameters({
-//            @Parameter(name="mode", required = true, description = "add - 등록, edit - 수정"),
-//            @Parameter(name="gid", required = true, description = "그룹 ID, 게시판 상단, 하단 이미지 관련"),
-//            @Parameter(name="listOrder", description = "진열 가중치, 수치가 높을 수록 먼저 게시판 노출"),
-//            @Parameter(name="bid", required = true, description = "게시판 아이디"),
-//            @Parameter(name="bname", required = true, description = "게시판 이름"),
-//            @Parameter(name="active", example = "false", description = "게시판 사용 여부")
+//            @Parameter(name="mode", required = true, description = "add - 등록, edit - 수정"), // 모드 (등록 또는 수정)
+//            @Parameter(name="gid", required = true, description = "그룹 ID, 게시판 상단, 하단 이미지 관련"), // 그룹 ID
+//            @Parameter(name="listOrder", description = "진열 가중치, 수치가 높을 수록 먼저 게시판 노출"), // 게시판 진열 순서
+//            @Parameter(name="bid", required = true, description = "게시판 아이디"), // 게시판 ID
+//            @Parameter(name="bname", required = true, description = "게시판 이름"), // 게시판 이름
+//            @Parameter(name="active", example = "false", description = "게시판 사용 여부") // 게시판 활성화 여부
 //    })
 //    @RequestMapping(method={RequestMethod.POST, RequestMethod.PATCH}, path="/save") // POST(등록), PATCH(수정) 모두 허용
 //    public ResponseEntity<Void> save(@RequestBody @Valid RequestBoardConfig form, Errors errors) {
@@ -36,7 +36,7 @@
 //        configValidator.validate(form, errors); // 게시판 설정 유효성 검사
 //
 //        if (errors.hasErrors()) { // 에러 발생 시 예외 처리
-//            throw new BadRequestException(utils.getErrorMessages(errors));
+//            throw new BadRequestException(utils.getErrorMessages(errors)); // 유효성 검사를 통과하지 못한 경우 예외 발생
 //        }
 //
 //        configSaveService.save(form); // 게시판 저장 서비스 호출
@@ -66,14 +66,14 @@
 //    @Operation(summary = "게시판 목록 조회") // API 문서화
 //    @ApiResponse(responseCode = "200", description = "items - 조회된 게시판 목록, pagination - 페이징 기초 데이터") // 응답 코드 설명
 //    @Parameters({ // API 요청 시 사용 가능한 파라미터 설명
-//            @Parameter(name="page", description = "페이지 번호", example = "1"),
-//            @Parameter(name="limit", description = "한 페이지당 게시판 개수", example = "20"),
-//            @Parameter(name="sopt", description = "검색 옵션", example = "ALL"),
-//            @Parameter(name="skey", description = "검색 키워드"),
-//            @Parameter(name="bid", description = "게시판 ID"),
-//            @Parameter(name="bids", description = "게시판 ID 목록"),
-//            @Parameter(name="bname", description = "게시판 이름"),
-//            @Parameter(name="active", description = "게시판 사용 여부", example = "true")
+//            @Parameter(name="page", description = "페이지 번호", example = "1"), // 페이지 번호
+//            @Parameter(name="limit", description = "한 페이지당 게시판 개수", example = "20"), // 한 페이지당 게시판 개수
+//            @Parameter(name="sopt", description = "검색 옵션", example = "ALL"), // 검색 옵션 (예: ALL, NAME 등)
+//            @Parameter(name="skey", description = "검색 키워드"), // 검색 키워드
+//            @Parameter(name="bid", description = "게시판 ID"), // 특정 게시판 ID
+//            @Parameter(name="bids", description = "게시판 ID 목록"), // 여러 게시판 ID 목록
+//            @Parameter(name="bname", description = "게시판 이름"), // 게시판 이름으로 검색
+//            @Parameter(name="active", description = "게시판 사용 여부", example = "true") // 게시판 활성화 여부
 //    })
 //    @GetMapping("/list") // 게시판 목록 조회
 //    public JSONData list(@ModelAttribute BoardSearch search) {
