@@ -69,20 +69,25 @@ dependencyManagement {
 	}
 }
 
+// JUnit 5 (JUnit Platform) 사용 설정
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
+// QueryDSL 자동 생성된 파일이 저장될 디렉토리 지정
 def querydslDir = layout.buildDirectory.dir("generated/querydsl").get().asFile
 
 sourceSets {
+	// QueryDSL이 생성한 Q클래스를 소스 코드로 인식하도록 추가
 	main.java.srcDirs += [ querydslDir ]
 }
 
 tasks.withType(JavaCompile) {
+	// Java 컴파일 시, QueryDSL이 생성한 Q클래스도 함께 컴파일되도록 설정
 	options.getGeneratedSourceOutputDirectory().set(file(querydslDir))
 }
 
 clean.doLast {
+	// 'gradle clean' 실행 시 QueryDSL이 생성한 Q클래스 삭제 (최신 상태 유지)
 	file(querydslDir).deleteDir()
 }
