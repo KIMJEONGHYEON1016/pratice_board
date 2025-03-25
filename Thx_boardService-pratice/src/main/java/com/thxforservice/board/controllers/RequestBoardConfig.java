@@ -10,60 +10,89 @@ import java.util.UUID;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RequestBoardConfig {
 
+    // 게시판 설정 모드 (기본값: "add" - 추가, "edit" - 수정 등)
     private String mode = "add";
 
+    // 게시판 그룹 ID (자동 생성되는 UUID 값)
     private String gid = UUID.randomUUID().toString();
 
-    private int listOrder; // 진열 가중치
+    // 게시판 진열 순서를 결정하는 가중치 (숫자가 높을수록 우선순위 ↑)
+    private int listOrder;
 
+    // 게시판 ID (필수 입력 값)
     @NotBlank
-    private String bid; // 게시판 아이디
+    private String bid;
 
+    // 게시판 이름 (필수 입력 값)
     @NotBlank
-    private String bname; // 게시판 이름
+    private String bname;
 
-    private boolean active; // 사용 여부
+    // 게시판 사용 여부 (true: 사용, false: 미사용)
+    private boolean active;
 
-    private int rowsPerPage = 20; // 1페이지 게시글 수
+    // 한 페이지당 표시할 게시글 수 (기본값: 20)
+    private int rowsPerPage = 20;
 
-    private int pageCountPc = 10; // PC 페이지 구간 갯수
+    // PC 환경에서 페이지네이션 블록 수 (기본값: 10)
+    private int pageCountPc = 10;
 
-    private int pageCountMobile = 5; // Mobile 페이지 구간 갯수
+    // 모바일 환경에서 페이지네이션 블록 수 (기본값: 5)
+    private int pageCountMobile = 5;
 
-    private boolean useReply; // 답글 사용 여부
+    // 답글 기능 사용 여부 (true: 사용, false: 미사용)
+    private boolean useReply;
 
-    private boolean useComment; // 댓글 사용 여부
+    // 댓글 기능 사용 여부 (true: 사용, false: 미사용)
+    private boolean useComment;
 
-    private boolean useEditor; // 에디터 사용 여부
+    // 에디터 사용 여부 (true: 사용, false: 미사용 - 일반 텍스트 입력)
+    private boolean useEditor;
 
-    private boolean useUploadImage; // 이미지 첨부 사용 여부
+    // 이미지 업로드 기능 사용 여부
+    private boolean useUploadImage;
 
-    private boolean useUploadFile; // 파일 첨부 사용 여부
-    
-    private String locationAfterWriting = "list"; // 글 작성 후 이동 위치
-    
-    private boolean showListBelowView; // 글 보기 하단 목록 노출 여부
-    
-    private String skin = "default"; // 스킨
+    // 파일 업로드 기능 사용 여부
+    private boolean useUploadFile;
 
-    private String category; // 게시판 분류
+    // 글 작성 후 이동 위치 설정 (기본값: "list")
+    private String locationAfterWriting = "list";
 
-    private String listAccessType = "ALL"; // 권한 설정 - 글목록
+    // 글 보기 페이지에서 하단 목록 표시 여부
+    private boolean showListBelowView;
 
-    private String viewAccessType = "ALL"; // 권한 설정 - 글보기
+    // 게시판 스킨 설정 (기본값: "default")
+    private String skin = "default";
 
-    private String writeAccessType = "ALL"; // 권한 설정 - 글쓰기
+    // 게시판 분류 (예: 공지사항, 자유게시판 등)
+    private String category;
 
-    private String replyAccessType = "ALL"; // 권한 설정 - 답글
+    // 게시판 권한 설정 - 글 목록 조회 가능 대상 (기본값: "ALL")
+    private String listAccessType = "ALL";
 
-    private String commentAccessType = "ALL"; // 권한 설정 - 댓글
+    // 게시판 권한 설정 - 글 보기 가능 대상 (기본값: "ALL")
+    private String viewAccessType = "ALL";
 
-    private String htmlTop; // 게시판 상단 HTML
-    private String htmlBottom; // 게시판 하단 HTML
+    // 게시판 권한 설정 - 글 작성 가능 대상 (기본값: "ALL")
+    private String writeAccessType = "ALL";
 
-    //@Transient
-    //private List<FileInfo> htmlTopImages; // 게시판 상단 Top 이미지
+    // 게시판 권한 설정 - 답글 작성 가능 대상 (기본값: "ALL")
+    private String replyAccessType = "ALL";
 
-    //@Transient
-    //private List<FileInfo> htmlBottomImages; // 게시판 하단 Bottom 이미지
+    // 게시판 권한 설정 - 댓글 작성 가능 대상 (기본값: "ALL")
+    private String commentAccessType = "ALL";
+
+    // 게시판 상단에 표시할 HTML 코드
+    private String htmlTop;
+
+    // 게시판 하단에 표시할 HTML 코드
+    private String htmlBottom;
+
+    // 아래 주석 처리된 필드는 Transient 속성으로 DB 저장 대상이 아님
+    // 게시판 상단에 표시할 이미지 파일 리스트
+    // @Transient
+    // private List<FileInfo> htmlTopImages;
+
+    // 게시판 하단에 표시할 이미지 파일 리스트
+    // @Transient
+    // private List<FileInfo> htmlBottomImages;
 }
