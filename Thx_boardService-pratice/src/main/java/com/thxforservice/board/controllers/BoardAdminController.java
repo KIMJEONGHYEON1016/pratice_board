@@ -93,6 +93,7 @@ public class BoardAdminController {
         return new JSONData(data);
     }
 
+
     // 게시판 삭제
     @Operation(summary = "게시판 삭제", description = "게시판 아이디(bid) 기준으로 게시판을 삭제합니다.")
     @ApiResponse(responseCode = "200", description = "게시판 삭제 성공")
