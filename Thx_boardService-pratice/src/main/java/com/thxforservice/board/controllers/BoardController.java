@@ -45,6 +45,7 @@ public class BoardController {
     private final Utils utils;
     private final MemberUtil memberUtil;
 
+    
     @Operation(summary = "게시판 설정 조회", method = "GET")
     @ApiResponse(responseCode = "200", description = "게시판 ID(bid)로 설정 조회")
     @Parameter(name="bid", required = true, description = "경로변수, 게시판 ID(bid)", example = "notice")
